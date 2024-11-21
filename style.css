@@ -1,0 +1,8 @@
+.card-body {
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: rgba(22, 148, 202, 0.505);
+    margin: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3rem;
+}
