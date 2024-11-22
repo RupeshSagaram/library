@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+
+    <dialog id="dialogElement">
+        <form name="my-form">
+            <p>
+                <label for="bookName">Book Name</label>
+                <input type="text" id="bookName" class="input bookName" name="bookName" required>
+            </p>
+
+            <p>
+                <label for="authorName">Author Name</label>
+                <input type="text" id="authorName" class="input" required>
+            </p>
+
+            <p>
+                <label for="pages">Pages</label>
+                <input type="text" id="pages" class="input" required >
+            </p>
+            <div>
+                <button value="cancel" formmethod="dialog"  id="cancelBtn">Cancel</button>
+                <button id="confirmBtn">Confirm</button>
+            </div>
+
+        </form>
+    </dialog>
+    <p>
+        <button id="newBook">New Book</button>
+    </p>
+
+<output id="output">    </output>
+
+
 </body>
 <script src="script.js"></script>
+
 </html>
