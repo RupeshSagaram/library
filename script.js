@@ -13,15 +13,16 @@ const read = document.getElementById("read");
 
 const myLibrary = [];
 
+//setting properties on prototype of Book object
+Book.prototype.read = "finished";
+
 /* this is a constructor that will be used
 in the addBookToLibrary function.
 */
-function Book(title, author,pages,read){
+function Book(title, author,pages){
 this.title = title;
 this.author = author;
 this.pages = pages;
-this.read = read;
-
 }
 
 function addBookToLibrary(title,author,pages,read){
@@ -59,11 +60,11 @@ dialogElement.addEventListener("close",() =>{
         const readEl = divElement.dataset.read;
 
         addBookToLibrary(bookName,authorName, pages,readEl);
-        console.log(divElement.dataset.bookName);
-        console.log(divElement.dataset.authorName);
-        console.log(divElement.dataset.pages);
-        console.log(divElement.dataset.readEl);
-        console.log(myLibrary);
+
+        let readStatusBtn = document.createElement("button");
+        readStatusBtn.textContent = "Read Status";
+        readStatusBtn.classList = "readStatusBtn";
+
         let removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove Button";
         removeBtn.classList = "removeBtn";
@@ -73,6 +74,7 @@ dialogElement.addEventListener("close",() =>{
         Pages: ${pagesEl.value},
         Read: ${read.value} `;
         document.body.appendChild(divElement);
+        divElement.appendChild(readStatusBtn);
         divElement.appendChild(removeBtn);
     
 });
@@ -80,17 +82,21 @@ dialogElement.addEventListener("close",() =>{
 
 myLibrary.forEach(function(item){
     let divElement = document.createElement("div");
+    let readStatusBtn = document.createElement("button");
+        readStatusBtn.textContent = "Read Status";
+        readStatusBtn.classList = "readStatusBtn";
     let removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove Button";
         removeBtn.classList = "removeBtn";
     divElement.classList = "card-body";
         
-    divElement.textContent = `Title: ${item.title}
+    divElement.textContent = `Title: ${item.title},
     Author: ${item.author},
     Pages: ${item.pages},
     Read: ${item.read} `;
     
     document.body.appendChild(divElement);
+    divElement.appendChild(readStatusBtn);
     divElement.appendChild(removeBtn);
 
     });
@@ -116,8 +122,37 @@ myLibrary.forEach(function(item){
             if (event.target && event.target.classList.contains("removeBtn")) {
                 handleRemoveButtonClick(event);
             }
-            console.log(myLibrary);
+            
     });
 
+    function handleReadStatus(event){
+        const divElement = event.target.parentElement;
+
+        if(Book.prototype.read ==="finished"){
+            Book.prototype.read = "not finished";
+            divElement.dataset.read = Book.prototype.read;
+            read.value = divElement.dataset.read;
+            console.log(read.value);
+
+           console.log(divElement.dataset.read);
+            console.log(Book.prototype.read);
+           
+        }
+
+        else if (Book.prototype.read ==="not finished"){
+            Book.prototype.read = "not finished";
+            divElement.dataset.read = Book.prototype.read;
+          
+        }
+    }
+
+    document.body.addEventListener("click", (event) => {
+        if (event.target && event.target.classList.contains("readStatusBtn")) {
+            handleReadStatus(event);
+        }
+    
+    });
+
+   
 
     
