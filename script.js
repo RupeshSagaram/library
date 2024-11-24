@@ -61,6 +61,18 @@ dialogElement.addEventListener("close",() =>{
 
         addBookToLibrary(bookName,authorName, pages,readEl);
 
+        const titlePara = document.createElement("p");
+         titlePara.textContent = `Title: ${bookNameEl.value}`;
+
+        const authorPara = document.createElement("p");
+        authorPara.textContent = `Author: ${authorNameEl.value}`;
+
+        const pagesPara = document.createElement("p");
+        pagesPara.textContent = `Pages: ${pagesEl.value}`;
+
+        const readPara = document.createElement("p");
+        readPara.textContent = `Read: ${read.value}`;
+
         let readStatusBtn = document.createElement("button");
         readStatusBtn.textContent = "Read Status";
         readStatusBtn.classList = "readStatusBtn";
@@ -69,11 +81,12 @@ dialogElement.addEventListener("close",() =>{
         removeBtn.textContent = "Remove Button";
         removeBtn.classList = "removeBtn";
         divElement.classList = "card-body";
-        divElement.textContent = `Title: ${bookNameEl.value}
-        Author: ${authorNameEl.value},
-        Pages: ${pagesEl.value},
-        Read: ${read.value} `;
+
         document.body.appendChild(divElement);
+        divElement.appendChild(titlePara);
+        divElement.appendChild(authorPara);
+        divElement.appendChild(pagesPara);
+        divElement.appendChild(readPara);
         divElement.appendChild(readStatusBtn);
         divElement.appendChild(removeBtn);
     
@@ -82,23 +95,36 @@ dialogElement.addEventListener("close",() =>{
 
 myLibrary.forEach(function(item){
     let divElement = document.createElement("div");
+ 
+    const titlePara = document.createElement("p");
+    titlePara.textContent = `Title: ${item.title}`;
+
+    const authorPara = document.createElement("p");
+    authorPara.textContent = `Author: ${item.author}`;
+
+    const pagesPara = document.createElement("p");
+    pagesPara.textContent = `Pages: ${item.pages}`;
+
+    const readPara = document.createElement("p");
+    readPara.textContent = `Read: ${item.read}`;
+
     let readStatusBtn = document.createElement("button");
-        readStatusBtn.textContent = "Read Status";
-        readStatusBtn.classList = "readStatusBtn";
+    readStatusBtn.textContent = "Read Status";
+    readStatusBtn.classList = "readStatusBtn";
+
     let removeBtn = document.createElement("button");
-        removeBtn.textContent = "Remove Button";
-        removeBtn.classList = "removeBtn";
+    removeBtn.textContent = "Remove Button";
+    removeBtn.classList = "removeBtn";
     divElement.classList = "card-body";
-        
-    divElement.textContent = `Title: ${item.title},
-    Author: ${item.author},
-    Pages: ${item.pages},
-    Read: ${item.read} `;
     
     document.body.appendChild(divElement);
+    divElement.appendChild(titlePara);
+    divElement.appendChild(authorPara);
+    divElement.appendChild(pagesPara);
+    divElement.appendChild(readPara);
     divElement.appendChild(readStatusBtn);
     divElement.appendChild(removeBtn);
-
+    
     });
 
     function handleRemoveButtonClick(event){
