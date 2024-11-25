@@ -7,31 +7,37 @@ const bookNameEl = document.forms["my-form"].bookName;
 const authorNameEl = document.forms["my-form"].authorName;
 const pagesEl = document.forms["my-form"].pages;
 const output = document.getElementById("output");
-const read = document.getElementById("read");
+const read = document.querySelector('input[name="read"]:checked');
 
 
 
 const myLibrary = [];
 
-//setting properties on prototype of Book object
-Book.prototype.read = "finished";
+   //setting properties on prototype of Book object
+  // Book.prototype.read = "finished"
 
 /* this is a constructor that will be used
 in the addBookToLibrary function.
 */
-function Book(title, author,pages){
+function Book(title, author,pages,statusRead){
 this.title = title;
 this.author = author;
 this.pages = pages;
+this.statusRead = statusRead;
 }
 
-function addBookToLibrary(title,author,pages,read){
-    myLibrary.push(new Book(title,author,pages,read));
+
+
+function addBookToLibrary(title,author,pages,statusRead){
+    myLibrary.push(new Book(title,author,pages,statusRead));
 }
 
 addBookToLibrary('bP','J.k.r',200,"finished");
+addBookToLibrary('vvvvvP','rr',500,"not finished");
 addBookToLibrary('Percy jackson','Rick Riorden',1200,"not finished");
 console.log(myLibrary);
+
+
 
 newBook.addEventListener("click", () =>{
     dialogElement.showModal();
@@ -49,10 +55,15 @@ confirmBtn.addEventListener("click", (event)=>{
 dialogElement.addEventListener("close",() =>{
     console.log(myLibrary);
         let divElement = document.createElement("div");
+        const read = document.querySelector('input[name="read"]:checked');
         divElement.dataset.bookName = bookNameEl.value;
         divElement.dataset.authorName = authorNameEl.value;
         divElement.dataset.pages = pagesEl.value;
         divElement.dataset.read = read.value;
+        console.log(divElement.dataset.read);
+
+        //setting properties on prototype of Book object
+        Book.prototype.read = divElement.dataset.read;
         //creating data attributes to elements
         const bookName = divElement.dataset.bookName;
         const authorName = divElement.dataset.authorName;
@@ -71,11 +82,13 @@ dialogElement.addEventListener("close",() =>{
         pagesPara.textContent = `Pages: ${pagesEl.value}`;
 
         const readPara = document.createElement("p");
-        readPara.textContent = `Read: ${read.value}`;
+        
+        readPara.textContent = `Read: ${readEl}`;
+
 
         let readStatusBtn = document.createElement("button");
         readStatusBtn.textContent = "Read Status";
-        readStatusBtn.classList = "readStatusBtn";
+        readStatusBtn.classList = "readStatusBtn"; 
 
         let removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove Button";
@@ -90,6 +103,7 @@ dialogElement.addEventListener("close",() =>{
         divElement.appendChild(readStatusBtn);
         divElement.appendChild(removeBtn);
     
+        console.log(read.value);
 });
 
 
@@ -106,7 +120,10 @@ myLibrary.forEach(function(item){
     pagesPara.textContent = `Pages: ${item.pages}`;
 
     const readPara = document.createElement("p");
+    readPara.classList ="readStatus";
     readPara.textContent = `Read: ${item.read}`;
+
+    divElement.dataset.read = item.read;
 
     let readStatusBtn = document.createElement("button");
     readStatusBtn.textContent = "Read Status";
@@ -126,6 +143,8 @@ myLibrary.forEach(function(item){
     divElement.appendChild(removeBtn);
     
     });
+
+ 
 
     function handleRemoveButtonClick(event){
         const divElement = event.target.parentElement;
@@ -153,27 +172,28 @@ myLibrary.forEach(function(item){
 
     function handleReadStatus(event){
         const divElement = event.target.parentElement;
+        const buttonElement = event.target;
+        const readPara = divElement.querySelector(".readStatus");
 
-        if(Book.prototype.read ==="finished"){
-            Book.prototype.read = "not finished";
-            divElement.dataset.read = Book.prototype.read;
-            read.value = divElement.dataset.read;
-            console.log(read.value);
-
-           console.log(divElement.dataset.read);
-            console.log(Book.prototype.read);
+        //readPara.textContent.includes("finished")
+        if(divElement.dataset.read ==="finished"){
+            readPara.textContent = "Read: pending"; 
+            Book.prototype.read === "pending"
+            divElement.dataset.read = "pending";
+            console.log(`Updated read status: ${divElement.dataset.read}`);
            
         }
 
-        else if (Book.prototype.read ==="not finished"){
-            Book.prototype.read = "not finished";
-            divElement.dataset.read = Book.prototype.read;
-          
+        else if (divElement.dataset.read ==="pending"){
+            readPara.textContent = "Read: finished"; 
+            Book.prototype.read === "finished"
+            divElement.dataset.read = "finished";  
+            console.log(`Updated read status: ${divElement.dataset.read}`);
         }
     }
 
     document.body.addEventListener("click", (event) => {
-        if (event.target && event.target.classList.contains("readStatusBtn")) {
+        if (event.target.classList.contains("readStatusBtn")) {
             handleReadStatus(event);
         }
     

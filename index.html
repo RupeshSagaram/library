@@ -27,9 +27,13 @@
                 <input type="text" id="pages" class="input" name="pages"required >
             </p>
 
-            <p>
-                <label for="read">Have you finished reading?</label>
-                <input type="checkbox" id="read" class="input" name="read" value= "Finished" required >
+            <p> Did you finish reading?
+                <label for="read-finished">Finished 
+                    <input type="radio" id="read-finished" class="input" name="read" value= "finished" data-read ="finished" required >
+                </label>
+                <label for="read-pending"> Pending
+                <input type="radio" id="read-pending" class="input" name="read" value= "pending" data-read ="pending" required >
+                </label>
             </p>
 
             <div>
