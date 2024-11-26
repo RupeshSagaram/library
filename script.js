@@ -14,27 +14,27 @@ const read = document.querySelector('input[name="read"]:checked');
 const myLibrary = [];
 
    //setting properties on prototype of Book object
-  // Book.prototype.read = "finished"
+//   Book.prototype.read = "";
 
 /* this is a constructor that will be used
 in the addBookToLibrary function.
 */
-function Book(title, author,pages,statusRead){
+function Book(title, author,pages,read){
 this.title = title;
 this.author = author;
 this.pages = pages;
-this.statusRead = statusRead;
+this.read = read;
 }
 
 
 
-function addBookToLibrary(title,author,pages,statusRead){
-    myLibrary.push(new Book(title,author,pages,statusRead));
+function addBookToLibrary(title,author,pages,read){
+    myLibrary.push(new Book(title,author,pages,read));
 }
 
 addBookToLibrary('bP','J.k.r',200,"finished");
-addBookToLibrary('vvvvvP','rr',500,"not finished");
-addBookToLibrary('Percy jackson','Rick Riorden',1200,"not finished");
+addBookToLibrary('vvvvvP','rr',500,"pending");
+addBookToLibrary('Percy jackson','Rick Riorden',1200,"pending");
 console.log(myLibrary);
 
 
@@ -133,6 +133,15 @@ myLibrary.forEach(function(item){
     removeBtn.textContent = "Remove Button";
     removeBtn.classList = "removeBtn";
     divElement.classList = "card-body";
+
+    console.log(divElement.dataset.read);
+
+    // if(divElement.dataset.read==="finished"){
+    //     Book.prototype.read = "finished";
+    // }
+    // else if (divElement.dataset.read ==="pending") {
+    //     Book.prototype.read = "pending";
+    // } 
     
     document.body.appendChild(divElement);
     divElement.appendChild(titlePara);
@@ -143,7 +152,7 @@ myLibrary.forEach(function(item){
     divElement.appendChild(removeBtn);
     
     });
-
+   
  
 
     function handleRemoveButtonClick(event){
