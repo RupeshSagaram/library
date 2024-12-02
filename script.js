@@ -11,6 +11,7 @@ const read = document.querySelector('input[name="read"]:checked');
 
 
 
+
 const myLibrary = [];
 
    //setting properties on prototype of Book object
@@ -32,10 +33,10 @@ function addBookToLibrary(title,author,pages,read){
     myLibrary.push(new Book(title,author,pages,read));
 }
 
-addBookToLibrary('bP','J.k.r',200,"finished");
-addBookToLibrary('vvvvvP','rr',500,"pending");
+addBookToLibrary('A Game Of Thrones','George R.R. Martin',1000,"finished");
+addBookToLibrary('for one more day','Mitch Albom',500,"pending");
 addBookToLibrary('Percy jackson','Rick Riorden',1200,"pending");
-console.log(myLibrary);
+
 
 
 
@@ -53,7 +54,7 @@ confirmBtn.addEventListener("click", (event)=>{
 });
 
 dialogElement.addEventListener("close",() =>{
-    console.log(myLibrary);
+    
         let divElement = document.createElement("div");
         const read = document.querySelector('input[name="read"]:checked');
         divElement.dataset.bookName = bookNameEl.value;
@@ -63,7 +64,7 @@ dialogElement.addEventListener("close",() =>{
         console.log(divElement.dataset.read);
 
         //setting properties on prototype of Book object
-        Book.prototype.read = divElement.dataset.read;
+        
         //creating data attributes to elements
         const bookName = divElement.dataset.bookName;
         const authorName = divElement.dataset.authorName;
@@ -82,6 +83,7 @@ dialogElement.addEventListener("close",() =>{
         pagesPara.textContent = `Pages: ${pagesEl.value}`;
 
         const readPara = document.createElement("p");
+        readPara.classList.add("readStatus");
         
         readPara.textContent = `Read: ${readEl}`;
 
@@ -102,8 +104,11 @@ dialogElement.addEventListener("close",() =>{
         divElement.appendChild(readPara);
         divElement.appendChild(readStatusBtn);
         divElement.appendChild(removeBtn);
+        Book.prototype.read = readEl;
+
+        console.log(readEl);
     
-        console.log(read.value);
+        
 });
 
 
@@ -120,7 +125,7 @@ myLibrary.forEach(function(item){
     pagesPara.textContent = `Pages: ${item.pages}`;
 
     const readPara = document.createElement("p");
-    readPara.classList ="readStatus";
+    readPara.classList.add("readStatus");
     readPara.textContent = `Read: ${item.read}`;
 
     divElement.dataset.read = item.read;
@@ -134,7 +139,6 @@ myLibrary.forEach(function(item){
     removeBtn.classList = "removeBtn";
     divElement.classList = "card-body";
 
-    console.log(divElement.dataset.read);
 
     // if(divElement.dataset.read==="finished"){
     //     Book.prototype.read = "finished";
@@ -185,6 +189,8 @@ myLibrary.forEach(function(item){
         const readPara = divElement.querySelector(".readStatus");
 
         //readPara.textContent.includes("finished")
+        divElement.dataset.read ==="finished"
+        
         if(divElement.dataset.read ==="finished"){
             readPara.textContent = "Read: pending"; 
             Book.prototype.read === "pending"
