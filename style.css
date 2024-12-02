@@ -1,13 +1,22 @@
 .card-body {
     padding: 1rem;
     border: 1px solid black;
-    background-color: #b4eefe;
+    background-color:rgba(250, 235, 215, 0.927);
     margin: 1rem;
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.3rem;
 }
 
+#containerDiv{
+    display: flex;
+}
 
+body{
+    background-image: url(img/lib.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-color: aquamarine;
+}
 button{
     background-color:rgba(0, 0, 0, 0.811); 
   border: none;
@@ -21,7 +30,13 @@ button{
   margin: 5px;
 }
 
+.newBookBtnPara{
+    margin:5px;
+    padding: 10px;
+    
+}
 div{
     text-align: center;
-    max-width: 300px;
+    min-width: 200px;
+    max-width: 500px;
 }

@@ -1,3 +1,4 @@
+const containerDiv = document.getElementById("containerDiv");
 const dialogElement = document.getElementById("dialogElement");
 const newBook = document.getElementById("newBook");
 const confirmBtn = document.getElementById("confirmBtn");
@@ -8,6 +9,7 @@ const authorNameEl = document.forms["my-form"].authorName;
 const pagesEl = document.forms["my-form"].pages;
 const output = document.getElementById("output");
 const read = document.querySelector('input[name="read"]:checked');
+
 
 
 
@@ -97,7 +99,9 @@ dialogElement.addEventListener("close",() =>{
         removeBtn.classList = "removeBtn";
         divElement.classList = "card-body";
 
+        
         document.body.appendChild(divElement);
+        containerDiv.appendChild(divElement);
         divElement.appendChild(titlePara);
         divElement.appendChild(authorPara);
         divElement.appendChild(pagesPara);
@@ -148,6 +152,7 @@ myLibrary.forEach(function(item){
     // } 
     
     document.body.appendChild(divElement);
+    containerDiv.appendChild(divElement);
     divElement.appendChild(titlePara);
     divElement.appendChild(authorPara);
     divElement.appendChild(pagesPara);
