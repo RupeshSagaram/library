@@ -10,26 +10,23 @@ const pagesEl = document.forms["my-form"].pages;
 const output = document.getElementById("output");
 const read = document.querySelector('input[name="read"]:checked');
 
-
-
-
-
 const myLibrary = [];
 
-   //setting properties on prototype of Book object
+//setting properties on prototype of Book object
 //   Book.prototype.read = "";
 
-/* this is a constructor that will be used
-in the addBookToLibrary function.
-*/
-function Book(title, author,pages,read){
-this.title = title;
-this.author = author;
-this.pages = pages;
-this.read = read;
+
+
+class Book {
+    constructor(title, author,pages,read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 }
-
-
+//  this Book class that will be used
+// in the addBookToLibrary function.
 
 function addBookToLibrary(title,author,pages,read){
     myLibrary.push(new Book(title,author,pages,read));
@@ -38,9 +35,6 @@ function addBookToLibrary(title,author,pages,read){
 addBookToLibrary('A Game Of Thrones','George R.R. Martin',1000,"finished");
 addBookToLibrary('for one more day','Mitch Albom',500,"pending");
 addBookToLibrary('Percy jackson','Rick Riorden',1200,"pending");
-
-
-
 
 newBook.addEventListener("click", () =>{
     dialogElement.showModal();
@@ -111,7 +105,6 @@ dialogElement.addEventListener("close",() =>{
         Book.prototype.read = readEl;
 
         console.log(readEl);
-    
         
 });
 
@@ -143,7 +136,6 @@ myLibrary.forEach(function(item){
     removeBtn.classList = "removeBtn";
     divElement.classList = "card-body";
 
-
     // if(divElement.dataset.read==="finished"){
     //     Book.prototype.read = "finished";
     // }
@@ -162,8 +154,6 @@ myLibrary.forEach(function(item){
     
     });
    
- 
-
     function handleRemoveButtonClick(event){
         const divElement = event.target.parentElement;
         delete divElement.dataset.bookName;
